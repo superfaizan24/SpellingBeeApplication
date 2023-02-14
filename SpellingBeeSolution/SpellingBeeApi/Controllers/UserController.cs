@@ -10,10 +10,8 @@ using Microsoft.AspNetCore.Cors;
 
 namespace SpellingBeeApi.Controllers
 {
-    [Route("api/user")]
+    [RoutePrefix("api/user")]
     [EnableCors]
-    
-    
     public class UserController : ApiController
     {
 
