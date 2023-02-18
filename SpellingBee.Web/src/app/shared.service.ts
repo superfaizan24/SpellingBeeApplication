@@ -13,11 +13,8 @@ private apiUrl = "http://localhost/api/user/RegisterUser";
 
 
   registerUser(firstname: string, lastname: string, email:string, password:string) {
-    return this.http.post(this.apiUrl, {
-      firstname,
-      lastname,
-      email,
-      password
-    });
+     return this.http.post<any[]>(this.apiUrl, {FirstName: firstname,
+          LastName: lastname, Email: email, Password: password}, { withCredentials: true }).pipe();
+
   }
 }
