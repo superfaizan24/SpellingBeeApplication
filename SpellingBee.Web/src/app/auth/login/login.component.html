@@ -10,18 +10,18 @@
             </a>
           </div>
           <div class="login-main">
-            <form class="theme-form" [formGroup]="loginForm">
+            <form class="theme-form" [formGroup]="loginForm" (ngSubmit)="onSignIn()">
               <h4>Sign in to account</h4>
               <p>Enter your email & password to login</p>
               <div class="form-group">
                 <label class="col-form-label">Email Address</label>
-                <input class="form-control" type="email" required="" placeholder="app@yourmail.com" formControlName="email" />
+                <input class="form-control" type="email" required="" placeholder="app@yourmail.com" formControlName="email" [(ngModel)]="email" name = "email" />
                 <div *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors?.required" class="text text-danger mt-1">Email is required</div>
                 <div *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors?.email" class="text text-danger mt-1">Invalid Email</div>
               </div>
               <div class="form-group">
                 <label class="col-form-label">Password</label>
-                <input class="form-control" [type]="show ? 'text' : 'password'" formControlName="password" required="" placeholder="*********" />
+                <input class="form-control" [type]="show ? 'text' : 'password'" formControlName="password" required="" placeholder="*********" [(ngModel)]="password" name = "password"/>
                 <div class="show-hide" (click)="showPassword()" *ngIf="!show"><span class="show"></span></div>
                 <div class="show-hide" (click)="showPassword()" *ngIf="show"><span class="Hide"></span></div>
                 <div *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors?.required" class="text text-danger mt-1">Password is required</div>
@@ -33,7 +33,7 @@
                 </div>
                 <a [routerLink]="'/authentication/forgot-password'" class="link">Forgot password?</a>
                 <div class="text-end mt-3">
-                  <button class="btn btn-primary d-block w-100" [disabled]="!loginForm.valid" (click)="login()" type="button"><span>Sign in</span></button>
+                  <button class="btn btn-primary d-block w-100" [disabled]="!loginForm.valid" type="submit"><span>Sign in</span></button>
                 </div>
               </div>
               <h6 class="text-muted mt-4 or">Or Sign in with</h6>
@@ -46,7 +46,7 @@
               </div>
               <p class="mt-4 mb-0">
                 Don't have account?
-                <a [routerLink]="'/authentication/register/simple'" class="ms-2">Create Account</a>
+               <a [routerLink]="'/authentication/register/simple'" class="ms-2">Create Account</a>
               </p>
             </form>
           </div>
