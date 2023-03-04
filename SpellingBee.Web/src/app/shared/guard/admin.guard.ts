@@ -1,24 +1,23 @@
-import { Injectable } from "@angular/core";
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { SharedService } from 'src/app/shared.service';
+
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
-  constructor(public router: Router) {}
 
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    // Guard for user is login or not
-    let user = JSON.parse(localStorage.getItem("user"));
-    if (!user || user === null) {
-      this.router.navigate(["/auth/login"]);
+  constructor(private SharedService: SharedService, private router: Router) {}
+
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      // if (JSON.parse(localStorage.getItem('user')) ||state.url === '/authentication/register/simple' || state.url === 'dashboard/defautl') {
+      //   return true;
+      // } else {
+      //   this.router.navigate(["/auth/login"]);
+      // }
       return true;
-    } else if (user) {
-      if (!Object.keys(user).length) {
-        this.router.navigate(["/auth/login"]);
-        return true;
-      }
-    }
-    return true;
   }
 }
