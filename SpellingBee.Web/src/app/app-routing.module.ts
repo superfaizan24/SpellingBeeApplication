@@ -8,16 +8,17 @@ import { content } from "./shared/routes/routes";
 import { SimpleComponent } from './pages/coming-soon/simple/simple.component';
 
 import { AdminGuard } from './shared/guard/admin.guard';
+import { DifficultySelectionComponent } from './auth/difficulty-selection/difficulty-selection.component';
+import { RegisterSimpleComponent } from './pages/authentication/register/simple/simple.component';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'dashboard/default',
-    pathMatch: 'full'
+    path: 'auth/login',
+    component: LoginComponent 
   },
   {
-    path: 'auth/login',
-    component: LoginComponent
+    path: 'authentication/register/simple',
+    component: RegisterSimpleComponent
   },
   {
     path: '',
@@ -30,6 +31,11 @@ const routes: Routes = [
     component: FullComponent,
     canActivate: [AdminGuard],
     children: full
+  },
+  {
+    path: '',
+    redirectTo: 'dashboard/default',
+    pathMatch: 'full'
   },
   {
     path: '**',
